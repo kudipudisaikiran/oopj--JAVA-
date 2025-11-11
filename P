@@ -1,0 +1,74 @@
+import React from "react"; 
+import Welcome from "./Welcome"; 
+function App() { 
+return ( 
+<div style={{ fontFamily: "system-ui", padding: 20 }}> 
+<h2>React Props and State Example</h2> 
+{/* Pass data (props) to child component */} 
+<Welcome name="Alice" /> 
+<Welcome name="Bob" /> 
+</div> 
+); 
+} 
+export default App 
+
+import React, { useState } from "react"; 
+function Welcome({ name }) { 
+// State to store number of greetings 
+const [count, setCount] = useState(0); 
+return ( 
+<div 
+style={{ 
+border: "1px solid #ccc", 
+padding: "10px", 
+margin: "10px 0", 
+borderRadius: "8px", 
+}} 
+> 
+<h3>Hello, {name}  </h3> 
+<p>You have greeted {count} times.</p> 
+<button onClick={() => setCount(count + 1)}>Say Hello</button> 
+</div> 
+); 
+} 
+export default Welcome;
+import React, { StrictMode } from "react";
+
+import { createRoot } from "react
+
+import "./styles.css"; 
+
+import App from "./App"; 
+
+const root = createRoot(document.getElementById("root"));
+
+root.render( 
+
+ <StrictMode> 
+
+ <App /> 
+
+ </StrictMode> 
+
+)
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+ <head> 
+
+ <meta charset="UTF-8"> 
+
+ <meta name="viewport" content="width=device
+
+ <title>Document</title> 
+
+ </head> 
+
+ <body> 
+
+ <div id="root"></div> 
+
+ </body> 
+
+</html>
