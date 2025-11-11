@@ -1,0 +1,32 @@
+// server.js
+const express = require('express');
+const ejs = require('ejs');
+const app = express();
+const PORT = 3000;
+
+// Define inline EJS template (no external file needed)
+const template = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= message %></h1>
+  <p>This page is rendered using the <b>EJS</b> templating engine.</p>
+</body>
+</html>
+`;
+
+// Define route
+app.get('/', (req, res) => {
+  const data = { title: 'Home Page', message: 'Welcome to EJS Example!' };
+  const html = ejs.render(template, data); // Render EJS string
+  res.send(html); // Send final HTML to browser
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});
