@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyLayoutApp());
+
+class MyLayoutApp extends StatelessWidget {
+  const MyLayoutApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Layout Demo',
+      home: Scaffold(
+        body: Stack(
+          children: [
+            // Background
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/phone wallpaper.webp'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+
+            // Foreground content
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Welcome to Flutter!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        _IconLabel(Icons.school, "Learn", Colors.blue),
+                        _IconLabel(Icons.code, "Build", Colors.green),
+                        _IconLabel(Icons.emoji_events, "Achieve", Colors.orange),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const Text(
+                      'Using Row, Column & Stack beautifully!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _IconLabel extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  const _IconLabel(this.icon, this.label, this.color, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(icon, size: 60, color: color),
+        Text(label),
+      ],
+    );
+  }
+}
