@@ -1,0 +1,54 @@
+#include <stdio.h>
+void generateHamming(int d[], int h[]) {
+    // Place data bits at 3,5,6,7 positions
+    h[2] = d[0];   // D1
+    h[4] = d[1];   // D2
+    h[5] = d[2];   // D3
+    h[6] = d[3];  
+
+    h[0] = h[2] ^ h[4] ^ h[6];   // P1
+    h[1] = h[2] ^ h[5] ^ h[6];   // P2
+    h[3] = h[4] ^ h[5] ^ h[6];   // P4
+}
+
+
+int detectError(int h[]) {
+    int p1 = h[0] ^ h[2] ^ h[4] ^ h[6];
+    int p2 = h[1] ^ h[2] ^ h[5] ^ h[6];
+    int p4 = h[3] ^ h[4] ^ h[5] ^ h[6];
+
+    return (p4 << 2) | (p2 << 1) | p1; // Forms error position
+}
+
+int main() {
+    int d[4], h[7], r[7];
+    int i, errorPos;
+
+    printf("Enter 4 data bits (0 or 1): ");
+    for (i = 0; i < 4; i++)
+        scanf("%d", &d[i]);
+
+    generateHamming(d, h);
+
+    printf("Generated 7-bit Hamming Code: ");
+    for (i = 0; i < 7; i++)
+        printf("%d ", h[i]);
+
+    printf("\n\nEnter received 7-bit code: ");
+    for (i = 0; i < 7; i++)
+        scanf("%d", &r[i]);
+
+    errorPos = detectError(r);
+
+    if (errorPos == 0) {
+        printf("No error detected.\n");
+    } else {
+        printf("Error detected at bit position: %d\n", errorPos);
+        r[errorPos - 1] ^= 1;   // Correct the bit
+        printf("Corrected Hamming Code: ");
+        for (i = 0; i < 7; i++)
+            printf("%d ", r[i]);
+    }
+
+    return 0;
+}
