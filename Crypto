@@ -1,0 +1,32 @@
+import java.util.*; 
+public class CryptoExperiment3 
+{ 
+    static String caesarEncrypt(String text, int key) 
+    { 
+        String result = ""; 
+        for (int i = 0; i < text.length(); i++) 
+        { 
+            char ch = text.charAt(i); 
+            if (Character.isLetter(ch)) 
+            { 
+                char base = Character.isUpperCase(ch) ? 'A' : 'a'; 
+                ch = (char)((ch - base + key) % 26 + base); 
+            } 
+            result += ch; 
+        } 
+        return result; 
+    } 
+    static String caesarDecrypt(String text, int key) 
+    { 
+        return caesarEncrypt(text, 26 - key); 
+    } 
+     public static void main(String[] args) 
+    { 
+        String text = "HELLO"; 
+        int key = 3; 
+        System.out.println("Original Text: " + text);
+        String c1 = caesarEncrypt(text, key); 
+        System.out.println("Caesar Encrypted: " + c1); 
+        System.out.println("Caesar Decrypted: " + caesarDecrypt(c1, key)); 
+    } 
+}
